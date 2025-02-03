@@ -1,5 +1,5 @@
-export interface IEventToast {
-  #events: Map<IEvent['event_id'], IEventsIndex>
+export interface IEventToastService {
+  #events: Map<IEvent["event_id"], IEventsIndex>
   events:  Array<IEventsIndex>;
 
   alert(msg: IEvent): void;
@@ -12,12 +12,12 @@ export interface IEventToast {
 
   getEventCount(e_id: IEvent["event_id"]): number;
   // Private methods (for reference, these can't be enforced directly in an interface)
-  #hasEvent(e_id: IEvent['event_id']): boolean;
-  #incrementCount(e_id: IEvent['event_id']): void;
-  #decrementEvent(e_id: IEvent['event_id']): number;
+  #hasEvent(e_id: IEvent["event_id"]): boolean;
+  #incrementCount(e_id: IEvent["event_id"]): void;
+  #decrementEvent(e_id: IEvent["event_id"]): number;
   #addEvent(msg: IEventsIndex): void;
-  #removeEvent(e_id: IEvent['event_id']): void;
-  #eventExists(e_id: IEvent['event_id']): boolean;
+  #removeEvent(e_id: IEvent["event_id"]): void;
+  #eventExists(e_id: IEvent["event_id"]): boolean;
 }
 
 export interface IEvent {
@@ -25,4 +25,7 @@ export interface IEvent {
   message: string;
 };
 
-export type IEventsIndex = [IEvent, number]
+export interface IEventsIndex {
+  0: IEvent;
+  1: number;
+}

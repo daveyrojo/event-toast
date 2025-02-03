@@ -1,7 +1,7 @@
-import type { IEventToast, IEvent, IEventsIndex } from "../types/event-toast"
+import type { IEventToastService, IEvent, IEventsIndex } from "../types/event-toast";
 import EventToastError from "./EventToastError";
-export default class implements IEventToast {
-  #events = reactive(new Map<IEvent['event_id'], IEventsIndex>());
+export default class implements IEventToastService {
+  #events = reactive(new Map<IEvent["event_id"], IEventsIndex>());
 
   get events(): IEventsIndex[] {
     return Array.from(this.#events.values());
@@ -46,17 +46,17 @@ export default class implements IEventToast {
     this.#events.delete(event_id);
   }
 
-  #eventExists({ event_id }: Pick<IEvent, "event_id">): Boolean {
+  #eventExists({ event_id }: Pick<IEvent, "event_id">): boolean {
     const eventExists = Boolean(this.#events.has(event_id));
     if (!eventExists) {
-      throw new EventToastError('event does not exist!', event_id);
+      throw new EventToastError("event does not exist!", event_id);
     } else {
       return eventExists;
     }
   }
 
   dismiss(event: IEvent | IEvent["event_id"]) {
-    if (typeof event === 'string') event = this.getEvent(event);
+    if (typeof event === "string") event = this.getEvent(event);
     if (!this.#hasEvent(event)) return;
     const num = this.#decrementEvent(event);
     if (num <= 0) {
@@ -74,7 +74,7 @@ export default class implements IEventToast {
     if (exists) {
       return this.#events.get(event_id)![0];
     } else {
-      throw new EventToastError('event not found!', event_id);
+      throw new EventToastError("event not found!", event_id);
     }
   }
 
@@ -83,7 +83,7 @@ export default class implements IEventToast {
     if (exists) {
       return this.#events.get(event_id)![1];
     } else {
-      throw new EventToastError('event not found!', event_id);
+      throw new EventToastError("event not found!", event_id);
     }
   }
 }
