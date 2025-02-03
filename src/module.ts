@@ -11,10 +11,10 @@ export default defineNuxtModule({
   // Default configuration options of the Nuxt module
   defaults: {},
   setup(_, _nuxt) {
-    const resolver = createResolver(import.meta.url)
+    const { resolve } = createResolver(import.meta.url)
     // Add the plugin (from runtime/)
     addPlugin({
-      src: require.resolve('./runtime/plugin'),
+      src: resolve('./runtime/plugin'),
       mode: 'client' // Ensure it runs only on the client
     });
   }
