@@ -26,17 +26,15 @@ watch(() => $events.events, (new_value) => {
         <h1 class="title">
           Event Occured
         </h1>
-          <button 
-            class="event-count"
-            @click="$events.dismiss(evt.event_id)">
+          <p class="event-count">
             {{ cnt }}
-          </button>
+          </p>
         <p class="message">
           {{ evt.message }}
         </p>
         <button
           class="dismiss"
-          @click="$events.clear(evt)">
+          @click="$events.dismiss(evt)">
           dismiss
         </button>
       </main>
