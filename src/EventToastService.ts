@@ -54,7 +54,9 @@ export default class implements IEventToast {
       return eventExists;
     }
   }
-  dismiss(event: IEvent) {
+
+  dismiss(event: IEvent | IEvent["event_id"]) {
+    if (typeof event === 'string') event = this.getEvent(event);
     if (!this.#hasEvent(event)) return;
     const num = this.#decrementEvent(event);
     if (num <= 0) {

@@ -1,13 +1,13 @@
 export interface IEventToast {
   #events: Map<IEvent['event_id'], IEventsIndex>
   events:  Array<IEventsIndex>;
-  
+
   alert(msg: IEvent): void;
-  
-  dismiss(e_id: IEvent): void;
-  
+
+  dismiss(e_id: IEvent | IEvent["event_id"]): void;
+
   deleteEvent(e_id: IEvent): void;
-  
+
   getEvent(e_id: IEvent["event_id"]): IEvent;
 
   getEventCount(e_id: IEvent["event_id"]): number;
